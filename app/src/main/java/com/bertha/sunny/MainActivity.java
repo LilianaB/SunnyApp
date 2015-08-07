@@ -1,5 +1,6 @@
 package com.bertha.sunny;
 
+import android.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,8 +46,11 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onResponse(Response response) throws IOException {
                 try {
+                    Log.v(TAG,response.body().string());
                     if (response.isSuccessful()){
-                        Log.v(TAG,response.body().string());
+
+                    } else {
+                        alertUserAboutError();
                     }
                 } catch (IOException e) {
                     Log.e(TAG,"Exception caught:", e);
@@ -55,10 +59,17 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        Log.d(TAG,"Main UI code is running");
+        Log.d(TAG, "Main UI code is running");
 
 
 
+    }
+
+    private void alertUserAboutError() {
+        //Toast or Dialog to warn user
+        // problem with toast is that is disappears from the screen rapidly
+        AlertDialogFragment dialog = new AlertDialogFragment();
+        dialog.show(getFragmentManager(),"error_dialog"); //second parameter is TAG
     }
 
 }
