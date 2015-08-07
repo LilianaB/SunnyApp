@@ -55,6 +55,8 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+        Log.d(TAG,"Main UI code is running");
+
 
 
     }
