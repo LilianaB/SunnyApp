@@ -1,11 +1,14 @@
 package com.bertha.sunny;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +34,10 @@ public class MainActivity extends ActionBarActivity {
 
     @Bind(R.id.timeLabel) TextView mTimeLabel;
     @Bind(R.id.temperatureLabel) TextView mTemperatureLabel;
+    @Bind(R.id.humidityValue) TextView mHumidityValue;
+    @Bind(R.id.precipValue) TextView mPrecipValue;
+    @Bind(R.id.summaryLabel) TextView mSummaryLabel;
+    @Bind(R.id.iconImageView) ImageView mIconImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +46,8 @@ public class MainActivity extends ActionBarActivity {
         ButterKnife.bind(this);
 
         String apiKey = "insert_key";
-        double latitude = 37.8267;
-        double longitude = -122.423;
+        double latitude = 47.22;
+        double longitude = 8.32;
         String forecastUrl = "https://api.forecast.io/forecast/"+apiKey+
                 "/"+latitude+","+longitude;
 
@@ -64,6 +71,13 @@ public class MainActivity extends ActionBarActivity {
                         Log.v(TAG, jsonWeatherData);
                         if (response.isSuccessful()) {
                             mCurrentWeather = getCurrentWeatherDetails(jsonWeatherData);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    updateDisplay();
+                                }
+                            });
+
 
                         } else {
                             alertUserAboutError();
@@ -85,6 +99,16 @@ public class MainActivity extends ActionBarActivity {
 
 
 
+    }
+
+    private void updateDisplay() {
+        mTemperatureLabel.setText(mCurrentWeather.getTemperature()+"");
+        mTimeLabel.setText("At "+ mCurrentWeather.getFormattedTime() + " it will be");
+        mHumidityValue.setText(mCurrentWeather.getHumidity()+"");
+        mPrecipValue.setText(mCurrentWeather.getPrecipProbability() + "%");
+        mSummaryLabel.setText(mCurrentWeather.getSummary() + "");
+        Drawable drawable = ContextCompat.getDrawable(this, mCurrentWeather.getIconId());
+        mIconImageView.setImageDrawable(drawable);
     }
 
     private CurrentWeather getCurrentWeatherDetails(String jsonWeatherData) throws JSONException {

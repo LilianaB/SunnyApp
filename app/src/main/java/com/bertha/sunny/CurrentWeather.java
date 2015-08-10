@@ -49,12 +49,14 @@ public class CurrentWeather {
         return timeString;
     }
 
-    public double getTemperature() {
-        return mTemperature;
+    public int getTemperature() {
+        return (int)Math.round(mTemperature);
     }
 
     public void setTemperature(double temperature) {
-        mTemperature = temperature;
+
+        double temperatureCelcious = (temperature  -  32.0)  *  (5.0/9.0);
+        mTemperature = temperatureCelcious;
     }
 
     public double getHumidity() {
@@ -66,7 +68,9 @@ public class CurrentWeather {
     }
 
     public double getPrecipProbability() {
-        return mprecipProbability;
+
+        double precipPercentage = mprecipProbability * 100;
+        return (int)Math.round(precipPercentage);
     }
 
     public void setPrecipProbability(double mprecipProbability) {
