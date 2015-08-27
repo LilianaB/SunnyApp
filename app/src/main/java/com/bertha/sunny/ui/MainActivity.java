@@ -1,6 +1,7 @@
 package com.bertha.sunny.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -33,6 +34,7 @@ import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -247,6 +249,13 @@ public class MainActivity extends ActionBarActivity {
         // problem with toast is that is disappears from the screen rapidly
         AlertDialogFragment dialog = new AlertDialogFragment();
         dialog.show(getFragmentManager(),"error_dialog"); //second parameter is TAG
+    }
+
+    @OnClick(R.id.dailyButton) //way to avoid boilerplate code, no need to add variable and onclick method
+    public void startDailyActivity(View view) {
+        Intent intent = new Intent(this, DailyForecastActivity.class);
+        startActivity(intent);
+
     }
 
 }
