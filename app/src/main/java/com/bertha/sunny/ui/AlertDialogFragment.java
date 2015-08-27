@@ -1,10 +1,12 @@
-package com.bertha.sunny;
+package com.bertha.sunny.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
+
+import com.bertha.sunny.R;
 
 /**
  * Created by liliana on 07/08/15.
