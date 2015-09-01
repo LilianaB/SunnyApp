@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bertha.sunny.R;
+import com.bertha.sunny.weather.Hour;
 
 /**
  * Created by liliana on 01/09/15.
@@ -44,6 +45,14 @@ public class HourAdapter extends RecyclerView.Adapter<HourAdapter.HourViewHolder
             mSummaryLabel = (TextView) viewItem.findViewById(R.id.summaryLabel);
             mTemperatureLabel = (TextView) viewItem.findViewById(R.id.temperatureLabel);
             mIconImageView = (ImageView) viewItem.findViewById(R.id.iconImageView);
+        }
+
+        public void bindHour(Hour hour) {
+            mTimeLabel.setText(hour.getHour());
+            mSummaryLabel.setText(hour.getSummary());
+            mTemperatureLabel.setText(hour.getTemperature()+"");
+            mIconImageView.setImageResource(hour.getIconId());
+
         }
 
     }
