@@ -1,14 +1,21 @@
 package com.bertha.sunny.weather;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by liliana on 27/08/15.
  */
-public class Hour {
+public class Hour implements Parcelable{
     private long mTime;
     private String mSummary;
     private double mTemperature;
     private String mIcon;
     private String mTimezone;
+
+    public Hour() {
+
+    }
 
     public long getTime() {
         return mTime;
@@ -49,4 +56,41 @@ public class Hour {
     public void setTimezone(String timezone) {
         mTimezone = timezone;
     }
+
+    @Override
+    public int describeContents() {
+        return 0; //ignore --> not needed
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(mTime);
+        dest.writeDouble(mTemperature);
+        dest.writeString(mSummary);
+        dest.writeString(mIcon);
+        dest.writeString(mTimezone);
+
+    }
+
+    //private constructure to read in from parcel
+    private Hour(Parcel in) {
+        mTime = in.readLong();
+        mTemperature = in.readDouble();
+        mSummary = in.readString();
+        mIcon = in.readString();
+        mTimezone = in.readString();
+    }
+
+    //create method required for PARCELABLE
+    public static final Creator<Hour> CREATOR = new Creator<Hour>() {
+        @Override
+        public Hour createFromParcel(Parcel source) {
+            return new Hour(source);
+        }
+
+        @Override
+        public Hour[] newArray(int size) {
+            return new Hour[size];
+        }
+    };
 }
