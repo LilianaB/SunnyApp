@@ -36,7 +36,8 @@ public class HourlyForecastActivity extends AppCompatActivity {
         Parcelable[] parcelables = intent.getParcelableArrayExtra(MainActivity.HOURLY_FORECAST);
         mHours = Arrays.copyOf(parcelables, parcelables.length, Hour[].class);
 
-        HourAdapter hourAdapter = new HourAdapter(mHours);
+        //becasue this is an activity you can use this as context variable
+        HourAdapter hourAdapter = new HourAdapter(this, mHours);
         mRecyclerView.setAdapter(hourAdapter);
 
         //new about recyclingView
