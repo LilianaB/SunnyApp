@@ -17,6 +17,10 @@ public class Day implements Parcelable{
     private String mIcon;
     private String mTimezone;
 
+    public Day() {
+
+    }
+
     public long getTime() {
         return mTime;
     }
@@ -38,7 +42,8 @@ public class Day implements Parcelable{
     }
 
     public void setTemperatureMax(double temperatureMax) {
-        mTemperatureMax = temperatureMax;
+        double temperatureCelcious = (temperatureMax  -  32.0)  *  (5.0/9.0);
+        mTemperatureMax = temperatureCelcious;
     }
 
     public String getIcon() {
@@ -102,5 +107,5 @@ public class Day implements Parcelable{
         public Day[] newArray(int size) {
             return new Day[size];
         }
-    }
+    };
 }
