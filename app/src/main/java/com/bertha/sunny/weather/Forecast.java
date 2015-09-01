@@ -1,5 +1,7 @@
 package com.bertha.sunny.weather;
 
+import com.bertha.sunny.R;
+
 /**
  * Created by liliana on 27/08/15.
  */
@@ -31,4 +33,41 @@ public class Forecast {
     private Current mCurrent;
     private Day[] mDailyForecast;
     private Hour[] mHourlyForecast;
+
+    public static int getIconId(String mIconString) {
+        int iconId = R.drawable.clear_day;
+
+        if (mIconString.equals("clear-day")) {
+            iconId = R.drawable.clear_day;
+        }
+        else if (mIconString.equals("clear-night")) {
+            iconId = R.drawable.clear_night;
+        }
+        else if (mIconString.equals("rain")) {
+            iconId = R.drawable.rain;
+        }
+        else if (mIconString.equals("snow")) {
+            iconId = R.drawable.snow;
+        }
+        else if (mIconString.equals("sleet")) {
+            iconId = R.drawable.sleet;
+        }
+        else if (mIconString.equals("wind")) {
+            iconId = R.drawable.wind;
+        }
+        else if (mIconString.equals("fog")) {
+            iconId = R.drawable.fog;
+        }
+        else if (mIconString.equals("cloudy")) {
+            iconId = R.drawable.cloudy;
+        }
+        else if (mIconString.equals("partly-cloudy-day")) {
+            iconId = R.drawable.partly_cloudy;
+        }
+        else if (mIconString.equals("partly-cloudy-night")) {
+            iconId = R.drawable.cloudy_night;
+        }
+
+        return iconId;
+    }
 }
