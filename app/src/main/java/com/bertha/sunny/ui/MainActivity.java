@@ -2,6 +2,7 @@ package com.bertha.sunny.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -76,6 +77,7 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+   // https://api.forecast.io/forecast/insert_key/47.22/8.32
     private void getForecast(double latitude, double longitude) {
         String apiKey = "insert_key";
 
@@ -269,5 +271,7 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
 
     }
+
+
 
 }
